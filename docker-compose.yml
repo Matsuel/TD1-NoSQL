@@ -1,4 +1,14 @@
 services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      DB_URL: ${DB_URL}
+    restart: always
+
   mongo:
     image: mongo:latest
     container_name: mongo_container
