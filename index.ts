@@ -1,6 +1,6 @@
 import express, { type Application } from 'express';
-import { connectToMongoDB } from '../mongodb';
-import { router } from '../routes';
+import { connectToMongoDB } from './api/mongodb';
+import { router } from './api/routes';
 
 const app: Application = express();
 app.use(express.json());

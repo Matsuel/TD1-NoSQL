@@ -3,8 +3,15 @@ import { User } from "./model";
 import { type Request, type Response } from "express";
 
 export const getProfiles = async (req: Request, res: Response): Promise<void> => {
+    const { location, skill, website } = req.query;
+
+    const filters: Record<string, any> = {};
+    if (location) filters["information.location"] = location;
+    if (website) filters["information.website"] = website;
+    if (skill) filters.skills = { $in: [skill] };
+
     try {
-        const profiles: Profile[] = await User.find();
+        const profiles: Profile[] = await User.find(filters);
         res.json(profiles);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch profiles" });
