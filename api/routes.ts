@@ -1,24 +1,24 @@
 import { Router } from "express";
-import { createExperience, createProfile, createSkill, deleteExperience, deleteProfile, deleteSkill, editProfileInformations, getProfileByID, getProfiles, updateProfile } from '../api/profiles/controller';
+import * as controller from '../api/profiles/controller';
 
 export const router = Router();
 
-router.get('/profiles', getProfiles);
+router.get('/profiles', controller.getProfiles);
 
-router.get('/profiles/:id', getProfileByID);
+router.get('/profiles/:id', controller.getProfileByID);
 
-router.post('/profiles', createProfile);
+router.post('/profiles', controller.createProfile);
 
-router.delete('/profiles/:id', deleteProfile);
+router.delete('/profiles/:id', controller.deleteProfile);
 
-router.put('/profiles/:id', updateProfile);
+router.put('/profiles/:id', controller.updateProfile);
 
-router.post('/profiles/:id/experience', createExperience);
+router.post('/profiles/:id/experience', controller.createExperience);
 
-router.delete('/profiles/:id/experience/:exp', deleteExperience);
+router.delete('/profiles/:id/experience/:exp', controller.deleteExperience);
 
-router.post('/profiles/:id/skills', createSkill);
+router.post('/profiles/:id/skills', controller.createSkill);
 
-router.delete('/profiles/:id/skills/:skill', deleteSkill);
+router.delete('/profiles/:id/skills/:skill', controller.deleteSkill);
 
-router.put('/profiles/:id/information', editProfileInformations);
+router.put('/profiles/:id/information', controller.editProfileInformations);
