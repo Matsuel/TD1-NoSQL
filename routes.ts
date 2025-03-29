@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as controller from '../api/profiles/controller';
+import * as controller from './api/profiles/controller';
 
 export const router = Router();
 

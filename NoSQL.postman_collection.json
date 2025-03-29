@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "6047c998-2b14-4cbd-a9b0-530f49a1efb2",
+		"name": "NoSQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27914358"
+	},
+	"item": [
+		{
+			"name": "Get Profiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get profile by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d02e066a8cc56338de06e6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"UOser1\",\r\n    \"email\": \"email@email.fr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Moi\",\r\n    \"email\":\"test@test.fr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d03a16eceac66b5962fc40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d039efbff47ab7207f196a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Experience",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\" : \"Dev\",\r\n    \"company\": \"Bordeaux\",\r\n    \"dates\": \"2022-2025\",\r\n    \"description\" : \"cc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/experience",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"experience"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d03a16eceac66b5962fc40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Experience",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/experience/:exp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"experience",
+						":exp"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d02e066a8cc56338de06e6"
+						},
+						{
+							"key": "exp",
+							"value": "67d0310d7de3169779bfd20c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Skill",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"skills\" : \"NodeJS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/skills",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"skills"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d03a16eceac66b5962fc40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete skill",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/skills/:skill",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"skills",
+						":skill"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d03a16eceac66b5962fc40"
+						},
+						{
+							"key": "skill",
+							"value": "NodeJS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit profile infos",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bio\": \"Dev Full Stack\",\r\n    \"location\": \"Bordeaux\",\r\n    \"website\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/information",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"information"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67d03a16eceac66b5962fc40"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
