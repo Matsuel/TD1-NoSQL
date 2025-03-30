@@ -13,9 +13,13 @@ const userSchema = new mongoose.Schema({
     experience: { type: [experienceSchema], default: [] },
     skills: { type: [String], default: [] },
     information: {
-        bio: { type: String, default: "" },
-        location: { type: String, default: "" },
-        website: { type: String, default: "" }
+        type: {
+            bio: { type: String, default: "" },
+            location: { type: String, default: "" },
+            website: { type: String, default: "" }
+        },
+        default: {},
+        _id: false
     }
 });
 

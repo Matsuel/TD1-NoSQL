@@ -30,11 +30,10 @@ export const getProfileByID = async (req: Request, res: Response): Promise<void>
 
 export const createProfile = async (req: Request, res: Response): Promise<void> => {
     const { name, email } = req.body;
-    console.log(name, email);
     try {
         const newUser = new User({ name, email });
         await newUser.save();
-        res.json(newUser);
+        res.status(201).json(newUser);
     } catch (error) {
         res.status(500).json({ error: "Failed to create profile" });
     }
@@ -149,13 +148,6 @@ export const editProfileInformations = async (req: Request, res: Response): Prom
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
-        }
-        if (!profile.information) {
-            profile.information = {
-                bio: "",
-                location: "",
-                website: ""
-            }
         }
         profile.information.bio = bio;
         profile.information.location = location;
