@@ -1,5 +1,5 @@
 import express, { type Application } from 'express';
-import { connectToMongoDB } from './mongodb';
+import { connectToMongoDB } from './config/mongodb';
 import { router } from './routes';
 
 const app: Application = express();
