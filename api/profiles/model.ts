@@ -24,7 +24,8 @@ const userSchema = new mongoose.Schema({
     friends: {
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         required: false,
-    }
+    },
+    isDeleted: { type: Boolean, default: false },
 });
 
 export const User = mongoose.model("User", userSchema);
