@@ -8,6 +8,7 @@ export type Profile = {
         location: string;
         website: string;
     };
+    isDeleted: boolean;
 };
 
 export type Experience = {
