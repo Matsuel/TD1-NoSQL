@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         },
         default: {},
         _id: false
+    },
+    friends: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        required: false,
     }
 });
 

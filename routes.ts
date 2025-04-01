@@ -22,3 +22,9 @@ router.post('/profiles/:id/skills', controller.createSkill);
 router.delete('/profiles/:id/skills/:skill', controller.deleteSkill);
 
 router.put('/profiles/:id/information', controller.editProfileInformations);
+
+router.get('/profiles/:id/friends', controller.getFriends);
+
+router.post('/profiles/:id/friends', controller.addFriend);
+
+router.delete('/profiles/:id/friends/:friendId', controller.removeFriend);

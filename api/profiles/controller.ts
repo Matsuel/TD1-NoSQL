@@ -11,7 +11,7 @@ export const getProfiles = async (req: Request, res: Response): Promise<void> =>
     if (skill) filters.skills = { $in: [skill] };
 
     try {
-        const profiles: Profile[] = await User.find(filters);
+        const profiles: Profile[] = await User.find(filters).populate("friends", "name email _id");
         res.json(profiles);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch profiles" });
@@ -21,7 +21,7 @@ export const getProfiles = async (req: Request, res: Response): Promise<void> =>
 export const getProfileByID = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findById(id).populate("friends", "name email _id");
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch profile" });
@@ -64,13 +64,11 @@ export const createExperience = async (req: Request, res: Response): Promise<voi
     const { id } = req.params;
     const { title, company, dates, description } = req.body;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findByIdAndUpdate(id, { $addToSet: { experience: { title, company, dates, description } } }, { new: true });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
         }
-        profile.experience.push({ title, company, dates, description });
-        await profile.save();
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to add experience" });
@@ -80,18 +78,11 @@ export const createExperience = async (req: Request, res: Response): Promise<voi
 export const deleteExperience = async (req: Request, res: Response): Promise<void> => {
     const { id, exp } = req.params;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findByIdAndUpdate(id, { $pull: { experience: { _id: exp } } }, { new: true });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
         }
-        const experienceToDelete = profile.experience.id(exp);
-        if (!experienceToDelete) {
-            res.status(404).json({ error: "Experience not found" });
-            return;
-        }
-        experienceToDelete.deleteOne();
-        await profile.save();
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to delete experience" });
@@ -102,17 +93,11 @@ export const createSkill = async (req: Request, res: Response): Promise<void> =>
     const { id } = req.params;
     const { skills } = req.body;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findByIdAndUpdate(id, { $addToSet: { skills } }, { new: true });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
         }
-        if (profile.skills.indexOf(skills) !== -1) {
-            res.status(400).json({ error: "Skill already exists" });
-            return;
-        }
-        profile.skills.push(skills);
-        await profile.save();
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to add skills" });
@@ -122,18 +107,11 @@ export const createSkill = async (req: Request, res: Response): Promise<void> =>
 export const deleteSkill = async (req: Request, res: Response): Promise<void> => {
     const { id, skill } = req.params;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findByIdAndUpdate(id, { $pull: { skills: skill } }, { new: true });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
         }
-        const skillToDelete = profile.skills.indexOf(skill);
-        if (skillToDelete === -1) {
-            res.status(404).json({ error: "Skill not found" });
-            return;
-        }
-        profile.skills.splice(skillToDelete, 1);
-        await profile.save();
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to delete skill" });
@@ -144,17 +122,56 @@ export const editProfileInformations = async (req: Request, res: Response): Prom
     const { id } = req.params;
     const { bio, location, website } = req.body;
     try {
-        const profile = await User.findById(id);
+        const profile = await User.findByIdAndUpdate(id, { $set: { "information.bio": bio, "information.location": location, "information.website": website } }, { new: true });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
             return;
         }
-        profile.information.bio = bio;
-        profile.information.location = location;
-        profile.information.website = website;
-        await profile.save();
         res.json(profile);
     } catch (error) {
         res.status(500).json({ error: "Failed to update information" });
+    }
+}
+
+export const getFriends = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+    try {
+        const profile = await User.findById(id).populate("friends", "name email _id");
+        if (!profile) {
+            res.status(404).json({ error: "Profile not found" });
+            return;
+        }
+        res.json(profile.friends);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch friends" });
+    }
+}
+
+export const addFriend = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params;
+    const { friendId } = req.body;
+    try {
+        const profile = await User.findByIdAndUpdate(id, { $addToSet: { friends: friendId } }, { new: true }).populate("friends", "name email _id");
+        if (!profile) {
+            res.status(404).json({ error: "Profile not found" });
+            return;
+        }
+        res.json(profile.friends);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to add friend" });
+    }
+}
+
+export const removeFriend = async (req: Request, res: Response): Promise<void> => {
+    const { id, friendId } = req.params;
+    try {
+        const profile = await User.findByIdAndUpdate(id, { $pull: { friends: friendId } }, { new: true }).populate("friends", "name email _id");
+        if (!profile) {
+            res.status(404).json({ error: "Profile not found" });
+            return;
+        }
+        res.json(profile.friends);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to remove friend" });
     }
 }
