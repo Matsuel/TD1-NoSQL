@@ -72,7 +72,7 @@ export const deleteProfile = async (req: Request, res: Response): Promise<void> 
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const { name, email } = req.body;
-    if (!id || (!name && !email)) {
+    if (!id || !name || !email) {
         res.status(400).json({ error: "ID, name or email is required" });
         return;
     }
