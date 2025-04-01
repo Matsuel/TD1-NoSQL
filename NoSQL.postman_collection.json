@@ -44,7 +44,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "67d02e066a8cc56338de06e6"
+							"value": "67eb9f23149620c96a8d7898"
 						}
 					]
 				}
@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"UOser1\",\r\n    \"email\": \"email@email.fr\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"UOser12\",\r\n    \"email\": \"emai2l@email.fr\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,7 +107,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "67d03a16eceac66b5962fc40"
+							"value": "67eb9f23149620c96a8d7898"
 						}
 					]
 				}
@@ -215,7 +215,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"skills\" : \"NodeJS\"\r\n}",
+					"raw": "{\r\n    \"skills\" : \"TS\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -237,7 +237,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "67d03a16eceac66b5962fc40"
+							"value": "67eb9f23149620c96a8d7898"
 						}
 					]
 				}
@@ -265,11 +265,11 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "67d03a16eceac66b5962fc40"
+							"value": "67eb9f23149620c96a8d7898"
 						},
 						{
 							"key": "skill",
-							"value": "NodeJS"
+							"value": "TS"
 						}
 					]
 				}
@@ -305,7 +305,102 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "67d03a16eceac66b5962fc40"
+							"value": "67eb9f23149620c96a8d7898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get friends",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/friends",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"friends"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67eb9f23149620c96a8d7898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Friend",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"friendId\": \"67eba09c6b4fb84096179713\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/friends",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"friends"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67eb9f23149620c96a8d7898"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Friend (seum)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/:id/friends/:friendId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						":id",
+						"friends",
+						":friendId"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "67eb9f23149620c96a8d7898"
+						},
+						{
+							"key": "friendId",
+							"value": "67eba09c6b4fb84096179713"
 						}
 					]
 				}
